@@ -1,0 +1,11 @@
+<form (ngSubmit)="onSubmit(email.value, password.value)">
+  <div class="mb-3">
+    <label class="form-label">Email: </label>
+    <input type="email" name="email" class="form-control" placeholder="email" #email>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Password: </label>
+    <input type="password" name="password" class="form-control" placeholder="password" #password>
+  </div>
+  <button class="btn btn-primary">Submit</button>
+</form>
