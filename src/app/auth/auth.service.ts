@@ -30,7 +30,9 @@ export class AuthService {
 
     const url = environment.api_url + 'login';
     return this.http.post(url, JSON.stringify({email, password}), {headers: headers, withCredentials: true}).pipe(
-      map(response => {
+      map((response: any) => {
+        const access_token = response['access_token'];
+        localStorage.setItem('access_token', access_token);
         console.log(response);
       }),
     );
