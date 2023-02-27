@@ -1,0 +1,9 @@
+.book_image{
+  width: 100px;
+  height: 200px;
+  object-fit: contain;
+}
+.book_image_item{
+  width: 100%;
+  object-fit: cover;
+}

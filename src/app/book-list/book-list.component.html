@@ -1,0 +1,14 @@
+<div *ngFor="let book of books">
+  <div>
+    <h1>Name of book: {{ book.name }}</h1>
+  </div>
+  <div>
+    <p>Price: {{ book.price }}</p>
+  </div>
+  <div class="book_image">
+    <img class="book_image_item" src="http://127.0.0.1:8081/{{ book.image_path }}" alt="">
+  </div>
+  <div>
+    <p>{{ book.description }}</p>
+  </div>
+</div>

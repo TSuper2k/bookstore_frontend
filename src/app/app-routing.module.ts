@@ -1,6 +1,7 @@
 import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 import {NgModule} from '@angular/core';
 import {LoginComponent} from "./auth/login/login.component";
+import {BookListComponent} from "./book-list/book-list.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
+  {
+    path: 'book-list',
+    component: BookListComponent
+  }
 ];
 
 @NgModule({
