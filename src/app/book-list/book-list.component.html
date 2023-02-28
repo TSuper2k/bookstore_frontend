@@ -5,8 +5,8 @@
       <div class="col-md-6">
         <h1>Book Store</h1>
       </div>
-      <div class="col-md-6">
-        <button routerLink="cart" class="btn btn-primary">
+      <div class="col-md-6 float-right">
+        <button routerLink="/cart" class="btn btn-primary">
           <i class="fa-solid fa-cart-shopping"></i>
           <div class="badge bg-danger">{{ totalItem }}</div>
         </button>
@@ -19,13 +19,13 @@
     <div class="row">
       <div class="col-md-4" *ngFor="let book of bookList">
         <div class="book_image">
-          <img class="book_image_item" src="{{ url + book.image_path }}" alt="">
+          <a [routerLink]="['/book-detail', book.id]"><img class="book_image_item" src="{{ web_url + book.image_path }}" alt=""></a>
         </div>
         <div>
           <h1>{{ book.name }}</h1>
         </div>
         <div>
-          <p>Price: {{ book.price }}</p>
+          <p>Price: {{ book.price | currency:'VND':'symbol':'1.0-0' }}</p>
         </div>
         <div>
           <p>{{ book.description }}</p>

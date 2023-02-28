@@ -1,8 +1,9 @@
-import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
-import {NgModule} from '@angular/core';
-import {LoginComponent} from "./auth/login/login.component";
-import {BookListComponent} from "./book-list/book-list.component";
+import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { LoginComponent } from "./auth/login/login.component";
+import { BookListComponent } from "./book-list/book-list.component";
 import { CartComponent } from "./cart/cart.component";
+import { BookDetailComponent } from "./book-detail/book-detail.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent
+  },
+  {
+    path: 'book-detail/:id',
+    component: BookDetailComponent
   }
 ];
 

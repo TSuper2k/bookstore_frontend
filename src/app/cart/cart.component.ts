@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../service/cart.service';
+import { environment } from "../../environment";
 
 @Component({
   selector: 'app-cart',
@@ -9,6 +10,8 @@ import { CartService } from '../service/cart.service';
 export class CartComponent implements OnInit {
   public books : any = [];
   public grandTotal : number = 0;
+
+  web_url = environment.web_url;
 
   constructor(private cart : CartService) {};
 

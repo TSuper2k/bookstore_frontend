@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { BookListComponent } from './book-list/book-list.component';
 import { CartComponent } from './cart/cart.component';
+import { CurrencyPipe } from '@angular/common';
+import { BookDetailComponent } from './book-detail/book-detail.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { CartComponent } from './cart/cart.component';
     LoginComponent,
     BookListComponent,
     CartComponent,
+    BookDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,7 @@ import { CartComponent } from './cart/cart.component';
     AppRoutingModule
   ],
   providers: [
-    
+    CurrencyPipe
   ],
   bootstrap: [AppComponent]
 })

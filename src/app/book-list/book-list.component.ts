@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BookService } from "../service/book.service";
 import { environment } from "../../environment";
 import { ApiService } from '../service/api.service';
 import { CartService } from '../service/cart.service';
@@ -10,7 +9,8 @@ import { CartService } from '../service/cart.service';
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit {
-  url = environment.api_url;
+  // api_url = environment.api_url;
+  web_url = environment.web_url;
 
   public bookList : any;
 

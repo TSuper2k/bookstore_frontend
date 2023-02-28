@@ -8,8 +8,9 @@ import { Observable } from 'rxjs/internal/Observable';
 
 export class BookService extends ApiService{
   getBooks(options = {}): Observable<any> {
-    const url = this.url + 'books';
-    return this.http.get<any>(url, {headers: this.headers}).pipe(
+    // const api_url = this.api_url + 'books';
+    const web_url = this.web_url + 'books';
+    return this.http.get<any>(web_url, {headers: this.headers}).pipe(
 
     );
   }
