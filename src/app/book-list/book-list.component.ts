@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {BookService} from "../api-services/book.service";
+import {environment} from "../../environment";
 
 @Component({
   selector: 'app-book-list',
@@ -8,12 +9,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BookListComponent implements OnInit {
   books: any[] = [];
+  url = environment.web_url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    this.http.get<any[]>('http://localhost:8081/api/books').subscribe(data => {
-      this.books = data;
+    this.bookService.getBooks().subscribe(response => {
+        this.books = response;
     });
   }
 }

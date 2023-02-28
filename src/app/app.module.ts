@@ -8,6 +8,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { BookListComponent } from './book-list/book-list.component';
+import {BookService} from "./api-services/book.service";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { BookListComponent } from './book-list/book-list.component';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    BookService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
