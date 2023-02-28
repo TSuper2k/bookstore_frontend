@@ -1,14 +1,37 @@
-<div *ngFor="let book of books">
-  <div>
-    <h1>Name of book: {{ book.name }}</h1>
-  </div>
-  <div>
-    <p>Price: {{ book.price }}</p>
-  </div>
-  <div class="book_image">
-    <img class="book_image_item" src="{{ url + book.image_path }}" alt="">
-  </div>
-  <div>
-    <p>{{ book.description }}</p>
+<div class="container">
+  <!-- Header -->
+  <header>
+    <div class="row">
+      <div class="col-md-6">
+        <h1>Book Store</h1>
+      </div>
+      <div class="col-md-6">
+        <button routerLink="cart" class="btn btn-primary">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <div class="badge bg-danger">{{ totalItem }}</div>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Store -->
+  <div class="book-list">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let book of bookList">
+        <div class="book_image">
+          <img class="book_image_item" src="{{ url + book.image_path }}" alt="">
+        </div>
+        <div>
+          <h1>{{ book.name }}</h1>
+        </div>
+        <div>
+          <p>Price: {{ book.price }}</p>
+        </div>
+        <div>
+          <p>{{ book.description }}</p>
+        </div>
+        <button class="btn btn-primary" (click)="addToCart(book)">Add to Cart</button>
+      </div>
+    </div>
   </div>
 </div>

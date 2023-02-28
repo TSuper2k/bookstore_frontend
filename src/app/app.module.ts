@@ -8,13 +8,14 @@ import { AppRoutingModule } from "./app-routing.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { BookListComponent } from './book-list/book-list.component';
-import {BookService} from "./api-services/book.service";
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    BookListComponent
+    BookListComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,7 +26,7 @@ import {BookService} from "./api-services/book.service";
     AppRoutingModule
   ],
   providers: [
-    BookService
+    
   ],
   bootstrap: [AppComponent]
 })

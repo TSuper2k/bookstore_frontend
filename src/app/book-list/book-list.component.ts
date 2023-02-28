@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {BookService} from "../api-services/book.service";
-import {environment} from "../../environment";
+import { BookService } from "../service/book.service";
+import { environment } from "../../environment";
+import { ApiService } from '../service/api.service';
+import { CartService } from '../service/cart.service';
 
 @Component({
   selector: 'app-book-list',
@@ -8,14 +10,29 @@ import {environment} from "../../environment";
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit {
-  books: any[] = [];
-  url = environment.web_url;
+  url = environment.api_url;
 
-  constructor(private bookService: BookService) { }
+  public bookList : any;
+
+  public totalItem : number = 0;
+
+  constructor(private api: ApiService, private cart: CartService) { }
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe(response => {
-        this.books = response;
-    });
+    this.api.getBook().subscribe(response => {
+      this.bookList = response;
+
+      this.bookList.forEach((a:any) => {
+        Object.assign(a, {quantity:1,total:a.price});
+      });
+
+      this.cart.getBooks().subscribe(response=>{
+        this.totalItem = response.length;
+      })
+    })
+  }
+
+  addToCart(book: any){
+    this.cart.addToCart(book);
   }
 }
