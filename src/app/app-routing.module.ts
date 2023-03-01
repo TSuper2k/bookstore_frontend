@@ -4,6 +4,7 @@ import { LoginComponent } from "./auth/login/login.component";
 import { BookListComponent } from "./book-list/book-list.component";
 import { CartComponent } from "./cart/cart.component";
 import { BookDetailComponent } from "./book-detail/book-detail.component";
+import { CheckoutComponent } from "./checkout/checkout.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'book-detail/:id',
     component: BookDetailComponent
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent
   }
 ];
 

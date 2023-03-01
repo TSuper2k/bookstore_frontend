@@ -33,7 +33,7 @@
               <td colspan="3"></td>
               <td><button (click)="emptyCart()" class="btn btn-danger">Empty Cart</button></td>
               <td><button routerLink="/book-list" class="btn btn-primary">Shop now</button></td>
-              <td><button class="btn btn-success">Checkout</button></td>
+              <td><button (click)="checkout()" class="btn btn-success">Checkout</button></td>
               <td><strong>Grand Total: {{ grandTotal | currency:'VND':'symbol':'1.0-0' }}</strong></td>
             </tr>
           </tbody>

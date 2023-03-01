@@ -10,7 +10,7 @@ import { CartService } from '../service/cart.service';
 })
 export class BookListComponent implements OnInit {
   // api_url = environment.api_url;
-  web_url = environment.web_url;
+  web_url = environment.webUrl;
 
   public bookList : any;
 

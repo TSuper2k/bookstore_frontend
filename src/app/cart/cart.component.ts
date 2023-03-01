@@ -11,7 +11,7 @@ export class CartComponent implements OnInit {
   public books : any = [];
   public grandTotal : number = 0;
 
-  web_url = environment.web_url;
+  web_url = environment.webUrl;
 
   constructor(private cart : CartService) {};
 
@@ -28,5 +28,13 @@ export class CartComponent implements OnInit {
 
   emptyCart(){
     this.cart.removeAllCart();
+  }
+
+  checkout(){
+    const books = this.books;
+    const totalPrice = this.grandTotal;
+    this.cart.checkout(books, totalPrice).subscribe(response => {
+      // Xử lý kết quả trả về từ server nếu cần
+    });
   }
 }

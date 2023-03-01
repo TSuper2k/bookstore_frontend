@@ -2,15 +2,15 @@
   <div class="row">
     <div class="col-md-8">
       <div class="book-image">
-        <img src="" alt="">
+        <img class="book_image_item" src="{{ web_url + book.image_path }}" alt="">
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="book-info">
-        <h1></h1>
-        <p></p>
-        <p></p>
+        <h1>{{book.name}}</h1>
+        <p>Price: {{ book.price | currency:'VND':'symbol':'1.0-0' }}</p>
+        <p>Description: {{ book.description }}</p>
       </div>
     </div>
   </div>

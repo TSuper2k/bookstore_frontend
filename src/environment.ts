@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
   env: 'dev',
-  api_url: 'http://localhost:8081/api/',
-  web_url: 'http://localhost:8081/'
+  apiUrl: 'http://localhost:8081/api/',
+  webUrl: 'http://localhost:8081/'
 }

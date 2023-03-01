@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +11,7 @@ export class CartService {
   public cartItemList: any = [];
   public bookList = new BehaviorSubject<any>([]);
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getBooks(){
     return this.bookList.asObservable();
@@ -48,5 +51,13 @@ export class CartService {
   removeAllCart(){
     this.cartItemList = [];
     this.bookList.next(this.cartItemList);
+  }
+
+  checkout(books: any[], totalPrice: number): Observable<any> {
+    const body = {
+      books: books,
+      totalPrice: totalPrice
+    };
+    return this.http.post(`${environment.apiUrl}orders/`, body);
   }
 }

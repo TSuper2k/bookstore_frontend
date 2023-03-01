@@ -7,8 +7,8 @@ import { environment } from '../../environment';
   providedIn: 'root'
 })
 export class ApiService {
-  protected api_url = environment.api_url;
-  protected web_url = environment.web_url;
+  protected api_url = environment.apiUrl;
+  protected web_url = environment.webUrl;
 
   protected headers = new HttpHeaders().set('Accept', 'application/json').set('Content-Type', 'application/json');
 

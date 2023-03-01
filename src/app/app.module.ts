@@ -11,6 +11,7 @@ import { BookListComponent } from './book-list/book-list.component';
 import { CartComponent } from './cart/cart.component';
 import { CurrencyPipe } from '@angular/common';
 import { BookDetailComponent } from './book-detail/book-detail.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BookDetailComponent } from './book-detail/book-detail.component';
     BookListComponent,
     CartComponent,
     BookDetailComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
