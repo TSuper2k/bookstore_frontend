@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from "../../environment";
 import { ApiService } from '../service/api.service';
 import { CartService } from '../service/cart.service';
+import {AuthService} from "src/app/auth/auth.service";
 
 @Component({
   selector: 'app-book-list',
@@ -16,7 +17,7 @@ export class BookListComponent implements OnInit {
 
   public totalItem : number = 0;
 
-  constructor(private api: ApiService, private cart: CartService) { }
+  constructor(private api: ApiService, private cart: CartService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.api.getBook().subscribe(response => {
@@ -34,5 +35,13 @@ export class BookListComponent implements OnInit {
 
   addToCart(book: any){
     this.cart.addToCart(book);
+  }
+
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

@@ -1,45 +1,33 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {User} from "../models/user";
-import {Router} from "@angular/router";
-import {HttpHeaders} from "@angular/common/http";
-import {environment} from "../../environment";
-import {map} from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environment';
+import { Router } from "@angular/router";
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
-  user: User = new User();
+  constructor(private http: HttpClient, private router: Router) {}
 
-  constructor(private router: Router, private http: HttpClient) {
-
-  }
-
-  init() {
-    if (this.isLoggedIn()) {
-      this.router.navigate(['/listings']);
-    }
-    if (!this.user.id && this.accessToken()) {
-
-    }
-  }
-
-  login(email: any, password: any) {
+  login(email: string, password: string) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const url = `${environment.apiUrl}/login`;
 
-    const url = environment.apiUrl + 'login';
-    return this.http.post(url, JSON.stringify({email, password}), {headers: headers, withCredentials: true}).pipe(
+    return this.http.post(url, JSON.stringify({email, password}), { headers, withCredentials: true })
+    .pipe(
       map((response: any) => {
-        const access_token = response['access_token'];
+        const { access_token } = response;
         localStorage.setItem('access_token', access_token);
+        this.router.navigate(['/book-list']);
         return response;
-      }),
+      })
     );
   }
 
-  accessToken() {
-    return localStorage.getItem('access_token');
+  logout() {
+    localStorage.removeItem('access_token');
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn() {

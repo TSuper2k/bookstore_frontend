@@ -21,7 +21,7 @@
             <tr *ngFor="let item of books; let i = index">
               <td>{{ i+1 }}</td>
               <td>{{ item.name }}</td>
-              <td class="book_image"><img class="book_image_item" src="{{ web_url + item.image_path }}" alt=""></td>
+              <td class="book_image"><img class="book_image_item" src="{{ web_url + '/' + item.image_path }}" alt=""></td>
               <td>{{ item.price | currency:'VND':'symbol':'1.0-0' }}</td>
               <td>{{ item.quantity }}</td>
               <td>{{ item.total | currency:'VND':'symbol':'1.0-0' }}</td>
