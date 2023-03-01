@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class CartService {
   public cartItemList: any = [];
   public bookList = new BehaviorSubject<any>([]);
+  grandTotal = 0;
 
   constructor(private http: HttpClient) { }
 
@@ -53,11 +54,24 @@ export class CartService {
     this.bookList.next(this.cartItemList);
   }
 
-  checkout(books: any[], totalPrice: number): Observable<any> {
+  // checkout(books: any[], totalPrice: number): Observable<any> {
+  //   const body = {
+  //     books: books,
+  //     totalPrice: totalPrice
+  //   };
+  //   return this.http.post(`${environment.apiUrl}orders/`, body);
+  // }
+
+  order(order: any): Observable<any> {
+    const books = this.cartItemList.map((item: any) => ({ book_id: item.id, quantity: item.quantity }));
+    const totalPrice = this.grandTotal;
     const body = {
       books: books,
-      totalPrice: totalPrice
+      totalPrice: totalPrice,
+      user_id: order.user_id
     };
-    return this.http.post(`${environment.apiUrl}orders/`, body);
+
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
+    return this.http.post(`${environment.apiUrl}/orders`, body, { headers: headers });
   }
 }

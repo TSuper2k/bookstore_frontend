@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../service/cart.service';
 import { environment } from "../../environment";
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,7 @@ export class CartComponent implements OnInit {
 
   web_url = environment.webUrl;
 
-  constructor(private cart : CartService) {};
+  constructor(private cart : CartService, private auth: AuthService) {};
 
   ngOnInit(): void {
     this.cart.getBooks().subscribe(response=>{
@@ -30,10 +31,24 @@ export class CartComponent implements OnInit {
     this.cart.removeAllCart();
   }
 
-  checkout(){
-    const books = this.books;
+  // checkout(){
+  //   const books = this.books;
+  //   const totalPrice = this.grandTotal;
+  //   this.cart.checkout(books, totalPrice).subscribe(response => {
+  //     // Xử lý kết quả trả về từ server nếu cần
+  //   });
+  // }
+
+  checkout() {
     const totalPrice = this.grandTotal;
-    this.cart.checkout(books, totalPrice).subscribe(response => {
+    const user_id = this.auth.getUserId();
+    const order = {
+      books: this.cart.cartItemList.map((item: any) => ({book_id: item.id, quantity: item.quantity})),
+      totalPrice: totalPrice,
+      user_id: user_id
+    };
+
+    this.cart.order(order).subscribe(response => {
       // Xử lý kết quả trả về từ server nếu cần
     });
   }

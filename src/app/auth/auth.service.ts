@@ -33,4 +33,15 @@ export class AuthService {
   isLoggedIn() {
     return !!localStorage.getItem('access_token');
   }
+
+  public getUserId(): number {
+    const userString = localStorage.getItem('user') || '{}';
+    let user;
+    try {
+      user = JSON.parse(userString);
+    } catch (e) {
+      console.error(`Error parsing user JSON: ${e}`);
+    }
+    return user?.id || null;
+  }
 }
