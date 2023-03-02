@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class CartService {
   public bookList = new BehaviorSubject<any>([]);
   grandTotal = 0;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getBooks(){
     return this.bookList.asObservable();
@@ -64,13 +65,13 @@ export class CartService {
 
   order(order: any): Observable<any> {
     const books = this.cartItemList.map((item: any) => ({ book_id: item.id, quantity: item.quantity }));
-    const totalPrice = this.grandTotal;
+    const totalPrice = this.getTotalPrice();
     const body = {
       books: books,
       totalPrice: totalPrice,
-      user_id: order.user_id
+      user_id: this.authService.getUserId()
     };
-
+    console.log(body)
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));
     return this.http.post(`${environment.apiUrl}/orders`, body, { headers: headers });
   }
