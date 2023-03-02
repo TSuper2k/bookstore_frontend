@@ -68,7 +68,7 @@ export class CartService {
     const body = {
       books: books,
       totalPrice: this.getTotalPrice(),
-      user_id: this.authService.getUserId()
+      // user_id: this.authService.getUserId()
     };
     console.log(body)
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token'));

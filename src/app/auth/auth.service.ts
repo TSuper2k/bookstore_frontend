@@ -19,7 +19,7 @@ export class AuthService {
       map((response: any) => {
         const { access_token, user_id } = response;
         localStorage.setItem('access_token', access_token);
-        localStorage.setItem('user_id', user_id);
+        // localStorage.setItem('user_id', user_id);
         this.router.navigate(['/book-list']);
         return response;
       })
@@ -28,7 +28,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('access_token');
-    localStorage.removeItem('user_id');
+    // localStorage.removeItem('user_id');
     this.router.navigate(['/login']);
   }
 
@@ -36,12 +36,12 @@ export class AuthService {
     return !!localStorage.getItem('access_token');
   }
 
-  public getUserId(): number | null {
-    const userId = localStorage.getItem('user_id');
-    if (userId === null) {
-      return null;
-    }
-    return parseInt(userId);
-  }
-  
+  // public getUserId(): number | null {
+  //   const userId = localStorage.getItem('user_id');
+  //   if (userId === null) {
+  //     return null;
+  //   }
+  //   return parseInt(userId);
+  // }
+
 }

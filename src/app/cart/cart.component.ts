@@ -41,11 +41,11 @@ export class CartComponent implements OnInit {
 
   checkout() {
     const totalPrice = this.grandTotal;
-    const user_id = this.auth.getUserId();
+    // const user_id = this.auth.getUserId();
     const order = {
       books: this.cart.cartItemList.map((item: any) => ({book_id: item.id, quantity: item.quantity})),
       totalPrice: totalPrice,
-      user_id: user_id
+      // user_id: user_id
     };
 
     this.cart.order(order).subscribe(response => {
