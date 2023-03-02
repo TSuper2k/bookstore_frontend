@@ -65,10 +65,9 @@ export class CartService {
 
   order(order: any): Observable<any> {
     const books = this.cartItemList.map((item: any) => ({ book_id: item.id, quantity: item.quantity }));
-    const totalPrice = this.getTotalPrice();
     const body = {
       books: books,
-      totalPrice: totalPrice,
+      totalPrice: this.getTotalPrice(),
       user_id: this.authService.getUserId()
     };
     console.log(body)
