@@ -20,6 +20,12 @@ export class BookListComponent implements OnInit {
   constructor(private api: ApiService, private cart: CartService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    const successMessage = localStorage.getItem('successMessage');
+    if (successMessage) {
+      // hiển thị thông báo cho người dùng
+      alert(successMessage);
+      localStorage.removeItem('successMessage');
+    }
     this.api.getBook().subscribe(response => {
       this.bookList = response;
 

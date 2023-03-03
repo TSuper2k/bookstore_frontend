@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../service/cart.service';
 import { environment } from "../../environment";
 import { AuthService } from 'src/app/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +15,7 @@ export class CartComponent implements OnInit {
 
   web_url = environment.webUrl;
 
-  constructor(private cart : CartService, private auth: AuthService) {};
+  constructor(private cart : CartService, private auth: AuthService, private router: Router) {};
 
   ngOnInit(): void {
     this.cart.getBooks().subscribe(response=>{
@@ -49,7 +50,11 @@ export class CartComponent implements OnInit {
     };
 
     this.cart.order(order).subscribe(response => {
-      // Xử lý kết quả trả về từ server nếu cần
+      // Xử lý kết quả trả về từ server
+      this.cart.removeAllCart();
+      localStorage.setItem('successMessage', 'Checkout thành công');
+      this.router.navigate(['/book-list']);
+
     });
   }
 }
