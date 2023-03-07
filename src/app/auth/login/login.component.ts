@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../service/auth.service";
 
 @Component({
@@ -6,12 +6,12 @@ import { AuthService } from "../../service/auth.service";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   constructor(private authService: AuthService) { }
 
+  ngOnInit() { }
+
   onSubmit(email: any, password: any) {
-    console.log(email)
-    console.log(password)
     this.authService.login(email, password).subscribe(
         (result: any) => {
         console.log(result)
@@ -20,6 +20,4 @@ export class LoginComponent {
       }
     );
   }
-
-
 }

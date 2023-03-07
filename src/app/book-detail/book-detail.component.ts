@@ -11,10 +11,7 @@ import { BookService } from '../service/book.service';
 })
 
 export class BookDetailComponent implements OnInit {
-  constructor(
-    private route: ActivatedRoute,
-    private bookService: BookService
-  ) { }
+  constructor( private route: ActivatedRoute, private bookService: BookService ) { }
 
   book!: Book;
   web_url = environment.webUrl;
