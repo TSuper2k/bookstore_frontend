@@ -10,7 +10,6 @@ import { Book } from '../models/book';
 export class BookService extends ApiService{
   private apiUrl = 'http://localhost:8081/api/books';
   getBooks(options = {}): Observable<any> {
-    // const api_url = this.api_url + 'books';
     const web_url = this.web_url + 'books';
     return this.http.get<any>(web_url, {headers: this.headers}).pipe(
 
@@ -21,4 +20,5 @@ export class BookService extends ApiService{
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<Book>(url);
   }
+  
 }

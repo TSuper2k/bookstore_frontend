@@ -11,13 +11,13 @@ import { BookService } from '../service/book.service';
 })
 
 export class BookDetailComponent implements OnInit {
-  book!: Book;
-  web_url = environment.webUrl;
-
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService
   ) { }
+
+  book!: Book;
+  web_url = environment.webUrl;
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));

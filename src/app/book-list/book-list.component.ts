@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from "../../environment";
 import { ApiService } from '../service/api.service';
 import { CartService } from '../service/cart.service';
-import {AuthService} from "src/app/auth/auth.service";
+import {AuthService} from "src/app/service/auth.service";
 
 @Component({
   selector: 'app-book-list',
@@ -10,14 +10,12 @@ import {AuthService} from "src/app/auth/auth.service";
   styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit {
-  // api_url = environment.api_url;
+  constructor(private api: ApiService, private cart: CartService, private authService: AuthService) { }
   web_url = environment.webUrl;
 
   public bookList : any;
 
   public totalItem : number = 0;
-
-  constructor(private api: ApiService, private cart: CartService, private authService: AuthService) { }
 
   ngOnInit(): void {
     const successMessage = localStorage.getItem('successMessage');
