@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -10,46 +9,40 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class CartService {
   constructor(private http: HttpClient) { }
 
-  public cartItemList: any = [];
   public bookList = new BehaviorSubject<any>([]);
-  public grandTotal: number = 0;
 
-  getBooks() {
+  getCartItems(): Observable<any> {
     return this.bookList.asObservable();
   }
 
-  setBooks(book: any) {
-    this.cartItemList.push(...book);
-    this.bookList.next(book);
+  setCartItems(book: any) {
+    this.bookList.next([...book]);
   }
 
   addToCart(book: any) {
-    this.cartItemList.push(book);
-    this.bookList.next(this.cartItemList);
-    this.getTotalPrice();
+    const currentCartItems = this.bookList.getValue();
+    const existingCartItemIndex = currentCartItems.findIndex((item: any) => item.id === book.id);
+    if (existingCartItemIndex > -1) {
+      currentCartItems[existingCartItemIndex].quantity += book.quantity;
+      currentCartItems[existingCartItemIndex].total = currentCartItems[existingCartItemIndex].price * currentCartItems[existingCartItemIndex].quantity;
+    } else {
+      currentCartItems.push(book);
+    }
+    this.setCartItems(currentCartItems);
   }
 
   getTotalPrice(): number {
-    let grandTotal = 0;
-    this.cartItemList.map((a: any) => {
-      grandTotal += a.total;
-    });
-
-    return grandTotal;
+    return this.bookList.getValue().reduce((total: number, item: any) => total + item.total, 0);
   }
 
   removeCartItem(book: any) {
-    this.cartItemList.map((a: any, index: any) => {
-      if (book.id === a.id) {
-        this.cartItemList.splice(index, 1);
-      }
-    })
-    this.bookList.next(this.cartItemList);
+    const currentCartItems = this.bookList.getValue();
+    const updatedCartItems = currentCartItems.filter((item: any) => item.id !== book.id);
+    this.bookList.next(updatedCartItems);
   }
 
-  removeAllCart() {
-    this.cartItemList = [];
-    this.bookList.next(this.cartItemList);
+  emptyCart() {
+    this.bookList.next([]);
   }
 
   order(order: any): Observable<any> {

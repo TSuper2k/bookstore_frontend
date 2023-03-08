@@ -10,16 +10,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  public books : any = [];
+  public cartItems : any = [];
   public grandTotal : number = 0;
 
   web_url = environment.webUrl;
 
-  constructor(private cart : CartService, private auth: AuthService, private router: Router) {};
+  constructor(private cart : CartService, private router: Router) {};
 
   ngOnInit(): void {
-    this.cart.getBooks().subscribe(response=>{
-      this.books = response;
+    this.cart.getCartItems().subscribe(response=>{
+      this.cartItems = response;
       this.grandTotal = this.cart.getTotalPrice();
     })
   }
@@ -29,22 +29,22 @@ export class CartComponent implements OnInit {
   }
 
   emptyCart(){
-    this.cart.removeAllCart();
+    this.cart.emptyCart();
   }
 
   checkout() {
-    const totalPrice = this.grandTotal;
+    const totalPrice = this.cart.getTotalPrice();
     const order = {
-      books: this.cart.cartItemList.map((item: any) => ({book_id: item.id, quantity: item.quantity})),
+      books: this.cart.bookList.getValue().map((item: any) => ({book_id: item.id, quantity: item.quantity})),
+
       totalPrice: totalPrice,
     };
 
     this.cart.order(order).subscribe(response => {
       // Xử lý kết quả trả về từ server
-      this.cart.removeAllCart();
-      localStorage.setItem('successMessage', 'Checkout thành công');
+      this.cart.emptyCart();
+      alert('Checkout thành công');
       this.router.navigate(['/book-list']);
-
     });
   }
 }
